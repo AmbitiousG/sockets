@@ -1,9 +1,9 @@
-#include <winsock2.h>
+ï»¿#include <winsock2.h>
 #pragma comment(lib, "WS2_32")
 
 #include <windows.h>
 
-#define OutErr(a) cout << (a) << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl 
+#define OutErr(a) cout << (a) << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl 
 #define OutMsg(a) cout << (a) << endl;
 
 #pragma warning(disable: 4786)
@@ -32,7 +32,7 @@ list<sClient_info>::iterator sClient_iterator;
 int a=0;
 int b=0;
 
-//È«¾ÖµãÎ»ºÅÁĞ±í£º³¤¶ÈÎª1000µÄÊı×é£¬Êı×éÔªËØÎªÖ¸Ïò°üº¬40¸öSOCKETÀàĞÍÊı¾İµÄÊı×éµÄÖ¸Õë£¬¸ÃÊı×é±£´æ×¢²á¸ÃµãÎ»µÄ¿Í»§¶ËÁĞ±í¡£Ã¿Ò»ĞĞµÄµÚÒ»Î»¾ùÎªINVALID_SOCKET
+//å…¨å±€ç‚¹ä½å·åˆ—è¡¨ï¼šé•¿åº¦ä¸º1000çš„æ•°ç»„ï¼Œæ•°ç»„å…ƒç´ ä¸ºæŒ‡å‘åŒ…å«40ä¸ªSOCKETç±»å‹æ•°æ®çš„æ•°ç»„çš„æŒ‡é’ˆï¼Œè¯¥æ•°ç»„ä¿å­˜æ³¨å†Œè¯¥ç‚¹ä½çš„å®¢æˆ·ç«¯åˆ—è¡¨ã€‚æ¯ä¸€è¡Œçš„ç¬¬ä¸€ä½å‡ä¸ºINVALID_SOCKET
 SOCKET all_dots[1000][30];
 
 int main(int argc, char* argv[])
@@ -49,22 +49,22 @@ int main(int argc, char* argv[])
 		all_dots[j][0]=INVALID_SOCKET;
 	}
 	
-	//³õÊ¼»¯winsock
+	//åˆå§‹åŒ–winsock
 	WSADATA wsd;
 	if (WSAStartup(MAKEWORD(2,2),&wsd)!=0)
 	{
-		cout << ("WSAStartup()") << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl;
+		cout << ("WSAStartup()") << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl;
 	}
 	else
 	{
-		// ´´½¨socketÌ×½Ó×Ö
+		// åˆ›å»ºsocketå¥—æ¥å­—
 		
 		if (SOCKET_ERROR == (sServer=socket(AF_INET, SOCK_STREAM, 0)))
 		{
 			printf("Init Socket Error!\n");
 			return -1;
 		}
-		//°ó¶¨¶Ë¿Ú
+		//ç»‘å®šç«¯å£
 		struct sockaddr_in servAddr;
 		servAddr.sin_family = AF_INET;
 		servAddr.sin_port = htons(6666);
@@ -72,17 +72,17 @@ int main(int argc, char* argv[])
 		
 		if(bind(sServer, (struct sockaddr *)&servAddr, sizeof(servAddr)) < 0)
 		{
-			cout << ("bind Failed!") << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl;
+			cout << ("bind Failed!") << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl;
 			return -1;
 		}
 		
-		// ÉèÖÃ¼àÌı¶ÓÁĞÎª40
+		// è®¾ç½®ç›‘å¬é˜Ÿåˆ—ä¸º40
 		if(listen(sServer, 40) != 0)
 		{
-			cout << ("listen Failed!") << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl;
+			cout << ("listen Failed!") << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl;
 			return -1;
 		}
-		printf("¿ªÊ¼¼àÌı£¡\n");
+		printf("å¼€å§‹ç›‘å¬ï¼\n");
 		
 		WSAEVENT event = WSACreateEvent();
 		WSAEventSelect(sServer,event, FD_ACCEPT|FD_CLOSE);
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 	
 	while (true)
 	{
-		//ÔÚËùÓĞÊÂ¼ş¶ÔÏóÉÏµÈ´ı
+		//åœ¨æ‰€æœ‰äº‹ä»¶å¯¹è±¡ä¸Šç­‰å¾…
 		int nIndex = WSAWaitForMultipleEvents(nEventTotal,eventArray,false,WSA_INFINITE,false);
 		nIndex = nIndex - WSA_WAIT_EVENT_0;
 		for (int i=nIndex;i<nEventTotal;i++)
@@ -108,13 +108,13 @@ int main(int argc, char* argv[])
 				WSANETWORKEVENTS event;
 				WSAEnumNetworkEvents(sockArray[i],eventArray[i],&event);
 				if (event.lNetworkEvents & FD_ACCEPT)
-				{//´¦ÀíÁ¬½ÓÇëÇóµÄÍ¨Öª
+				{//å¤„ç†è¿æ¥è¯·æ±‚çš„é€šçŸ¥
 					
 					if (event.iErrorCode[FD_ACCEPT_BIT]==0)
 					{
 						if (nEventTotal > WSA_MAXIMUM_WAIT_EVENTS)
 						{
-							cout <<"Ì«¶àÁ¬½ÓÁË£¡" << endl;
+							cout <<"å¤ªå¤šè¿æ¥äº†ï¼" << endl;
 							continue;
 						}
 						struct sockaddr_in cliAddr;
@@ -122,21 +122,21 @@ int main(int argc, char* argv[])
 						SOCKET sClient = accept(sServer,(struct sockaddr *)&cliAddr,&cliAddrSize);
 						if (sClient == INVALID_SOCKET)
 						{
-							cout << ("accept failed!") << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl;
+							cout << ("accept failed!") << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl;
 							return -1;
 						}
-						printf("ÓĞ¿Í»§¶ËÁ¬½Ó½øÀ´£¡\n");
+						printf("æœ‰å®¢æˆ·ç«¯è¿æ¥è¿›æ¥ï¼\n");
 						
-						//ÕâÀï¿ÉµÃµ½¿Í»§¶ËµÄIPµØÖ· cliAddr.sin_addr
-						ioctlsocket(sClient, FIONBIO, &NonBlock);//·Ç×èÈû
-						//Ìí¼Óµ½listÖĞ
+						//è¿™é‡Œå¯å¾—åˆ°å®¢æˆ·ç«¯çš„IPåœ°å€ cliAddr.sin_addr
+						ioctlsocket(sClient, FIONBIO, &NonBlock);//éé˜»å¡
+						//æ·»åŠ åˆ°listä¸­
 						sClient_info sClient1;
 						sClient1.sockClient=sClient;
 						sClient_info_list.push_back(sClient1);
 						
 						WSAEVENT event = WSACreateEvent();
 						WSAEventSelect(sClient, event, FD_READ|FD_CLOSE|FD_WRITE);
-						// Ìí¼Óµ½±íÖĞ
+						// æ·»åŠ åˆ°è¡¨ä¸­
 						eventArray[nEventTotal] = event;
 						sockArray[nEventTotal] = sClient;
 						nEventTotal++;
@@ -156,11 +156,11 @@ int main(int argc, char* argv[])
 					}
 				}
 				else if (event.lNetworkEvents & FD_READ)
-				{//´¦Àí½ÓÊÕÏûÏ¢µÄÍ¨Öª
-					++a;//´¥·¢Ò»´Îfd_read
+				{//å¤„ç†æ¥æ”¶æ¶ˆæ¯çš„é€šçŸ¥
+					++a;//è§¦å‘ä¸€æ¬¡fd_read
 					cout<< "a "<< a<<endl;
 					if(event.iErrorCode[FD_READ_BIT] == 0)
-					{//ĞèÅĞ¶ÏÒ»ÏÂÊÇ·ñ´¦ÀíÏûÏ¢³É¹¦
+					{//éœ€åˆ¤æ–­ä¸€ä¸‹æ˜¯å¦å¤„ç†æ¶ˆæ¯æˆåŠŸ
 						//.......
 						//ProcessMsg(sockArray[i],cBuff);
 						char szText[10240];
@@ -172,11 +172,11 @@ int main(int argc, char* argv[])
 						{
 							if(WSAGetLastError() != WSAEWOULDBLOCK)
 							{
-								cout <<  "³ö´í´úÂë£º" << WSAGetLastError() << endl;
+								cout <<  "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl;
 								closesocket(sockArray[i]);
 
 								cout << "Find the client closing."<< endl;
-								//´ÓlistÖĞÉ¾È¥¸Ã¿Í»§¶Ë					
+								//ä»listä¸­åˆ å»è¯¥å®¢æˆ·ç«¯					
 								for (sClient_iterator=sClient_info_list.begin();sClient_iterator!=sClient_info_list.end();sClient_iterator++)
 								{
 									if((*sClient_iterator).sockClient==sockArray[i])
@@ -197,18 +197,18 @@ int main(int argc, char* argv[])
 								break;
 							}
 						}
-						// Ã»³öÈÎºÎ´íÎó
+						// æ²¡å‡ºä»»ä½•é”™è¯¯
 						else{
 							dots_info struct_dots;
 							memcpy(&struct_dots, szText, sizeof(struct_dots));
-							//printf("½ÓÊÕµ½Êı¾İ£º%s \n", szText);
+							//printf("æ¥æ”¶åˆ°æ•°æ®ï¼š%s \n", szText);
 							cout<< "number of dots: "<<struct_dots.length<<endl;
 							cout << "length of struct_dots: "<< sizeof(struct_dots)<<endl;
 							for (int j=0 ; j<struct_dots.length;j++)
 							{
 								cout<< struct_dots.dots[j]<<endl;
 							}
-							//°Ñ¿Í»§¶Ë´«¹ıÀ´µÄµãÎ»ºÅ´«µ½listÖĞµÄµãÎ»Êı×éÖĞ£¬²¢½«´Ë¿Í»§¶Ë¼ÓÈëµ½È«¾ÖµãÎ»ÁĞ±íÖĞ£¬Êı×éµÚÒ»Î»ÏÂ±êÎª0£¬ËùÒÔÓëÊµ¼ÊµãÎ»Öµ²î1
+							//æŠŠå®¢æˆ·ç«¯ä¼ è¿‡æ¥çš„ç‚¹ä½å·ä¼ åˆ°listä¸­çš„ç‚¹ä½æ•°ç»„ä¸­ï¼Œå¹¶å°†æ­¤å®¢æˆ·ç«¯åŠ å…¥åˆ°å…¨å±€ç‚¹ä½åˆ—è¡¨ä¸­ï¼Œæ•°ç»„ç¬¬ä¸€ä½ä¸‹æ ‡ä¸º0ï¼Œæ‰€ä»¥ä¸å®é™…ç‚¹ä½å€¼å·®1
 							for (sClient_iterator=sClient_info_list.begin();sClient_iterator!=sClient_info_list.end();sClient_iterator++)
 							{
 								if((*sClient_iterator).sockClient==sockArray[i])
@@ -262,7 +262,7 @@ int main(int argc, char* argv[])
 					}
 				}				
 				else if (event.lNetworkEvents & FD_CLOSE)
-				{//´¦ÀíÁ¬½Ó¹Ø±ÕµÄÍ¨Öª
+				{//å¤„ç†è¿æ¥å…³é—­çš„é€šçŸ¥
 					if(event.iErrorCode[FD_CLOSE_BIT] == 0)
 					{
 						closesocket(sockArray[i]);
@@ -281,7 +281,7 @@ int main(int argc, char* argv[])
 						cout<< endl; */
 						
 						cout << "Find the client closing."<< endl;
-						//´ÓlistÖĞÉ¾È¥¸Ã¿Í»§¶Ë					
+						//ä»listä¸­åˆ å»è¯¥å®¢æˆ·ç«¯					
 						for (sClient_iterator=sClient_info_list.begin();sClient_iterator!=sClient_info_list.end();sClient_iterator++)
 						{
 							if((*sClient_iterator).sockClient==sockArray[i])
@@ -337,15 +337,15 @@ int main(int argc, char* argv[])
 					}
 				}
 				else if (event.lNetworkEvents & FD_WRITE)
-				{//´¦ÀíFD_WRITEÍ¨ÖªÏûÏ¢
+				{//å¤„ç†FD_WRITEé€šçŸ¥æ¶ˆæ¯
 					b++;
-					cout<<"FD_WRITE´¥·¢Ò»´Î b++"<<b<< endl;
+					cout<<"FD_WRITEè§¦å‘ä¸€æ¬¡ b++"<<b<< endl;
 				}
 				
 			}
 			
 		}
 	}
-	WSACleanup();//ÊÍ·Å×ÊÔ´µÄ²Ù×÷
+	WSACleanup();//é‡Šæ”¾èµ„æºçš„æ“ä½œ
 	return 1;
 }

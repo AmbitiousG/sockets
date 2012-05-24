@@ -1,4 +1,4 @@
-#include <WINSOCK2.H>
+ï»¿#include <WINSOCK2.H>
 #include <windows.h>
 #include <iostream>
 #pragma comment(lib,"ws2_32.lib")
@@ -18,15 +18,15 @@ void main()
 	WORD versionRequired;
 	WSADATA wsaData;
 	versionRequired=MAKEWORD(1,1);
-	err=WSAStartup(versionRequired,&wsaData);//Ğ­Òé¿âµÄ°æ±¾ĞÅÏ¢
+	err=WSAStartup(versionRequired,&wsaData);//åè®®åº“çš„ç‰ˆæœ¬ä¿¡æ¯
 	if (!err)
 	{
-		printf("¿Í»§¶ËÇ¶Ì××ÖÒÑ¾­´ò¿ª!\n");
+		printf("å®¢æˆ·ç«¯åµŒå¥—å­—å·²ç»æ‰“å¼€!\n");
 	}
 	else
 	{
-		printf("¿Í»§¶ËµÄÇ¶Ì××Ö´ò¿ªÊ§°Ü!\n");
-		return;//½áÊø
+		printf("å®¢æˆ·ç«¯çš„åµŒå¥—å­—æ‰“å¼€å¤±è´¥!\n");
+		return;//ç»“æŸ
 	}
 	SOCKET clientSocket=socket(AF_INET,SOCK_STREAM,0);
 
@@ -36,10 +36,10 @@ void main()
 	clientsock_in.sin_addr.S_un.S_addr=inet_addr("127.0.0.1");
 	clientsock_in.sin_family=AF_INET;
 	clientsock_in.sin_port=htons(6666);
-	//bind(clientSocket,(SOCKADDR*)&clientsock_in,strlen(SOCKADDR));//×¢ÒâµÚÈı¸ö²ÎÊı
+	//bind(clientSocket,(SOCKADDR*)&clientsock_in,strlen(SOCKADDR));//æ³¨æ„ç¬¬ä¸‰ä¸ªå‚æ•°
 	//listen(clientSocket,5);
 	if(SOCKET_ERROR==connect(clientSocket,(SOCKADDR*)&clientsock_in,sizeof(SOCKADDR)))
-	cout << ("accept failed!") << endl << "³ö´í´úÂë£º" << WSAGetLastError() << endl << "³ö´íÎÄ¼ş£º" << __FILE__ << endl << "³ö´íĞĞÊı£º" << __LINE__ << endl;//¿ªÊ¼Á¬½Ó
+	cout << ("accept failed!") << endl << "å‡ºé”™ä»£ç ï¼š" << WSAGetLastError() << endl << "å‡ºé”™æ–‡ä»¶ï¼š" << __FILE__ << endl << "å‡ºé”™è¡Œæ•°ï¼š" << __LINE__ << endl;//å¼€å§‹è¿æ¥
 	else printf("success!\n");
 	char receiveBuf[100];
 	/* recv(clientSocket,receiveBuf,101,0);
